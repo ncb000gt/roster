@@ -10,3 +10,10 @@ Usage
 
 Throw the module in your <axiom_root>/modules directory.
 Place the module in your app.properties file.
+
+To use with your user/account objects.
+
+YourUserPrototype/prototype.properties
+<code>
+_extends = Patron
+</code>
