@@ -1,4 +1,4 @@
-the-inn
+roster
 --------------
 
 This module aims to be the defacto-standard for users and management of said users.
@@ -15,5 +15,5 @@ To use with your user/account objects.
 
 YourUserPrototype/prototype.properties
 <code>
-_extends = Patron
+_extends = User
 </code>
