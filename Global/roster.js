@@ -1,15 +1,11 @@
-if (!(global.inn)) {
-    global.inn = {};
-}
-
-global.inn = {
+global.roster = {
     /**
      * Authenticates the user with the password. This does not log the user into the site.
      *
      * <code>
      * var user = inn.authenticate('me','password');
      * if (user) {
-     *     inn.login(user);
+     *     roster.login(user);
      *     return 'Login success. Hip Hip Hooray!';
      * } else {
      *     return 'Failboat. Credentials do not match.';
@@ -21,10 +17,10 @@ global.inn = {
      * @return {Object} returns user object if found, otherwise, null.
      */
     authenticate: function(username, password) {
-	var users = app.getObjects('Patron', {username: username}, {polymorphic:true});
+	var users = app.getObjects('User', {username: username}, {polymorphic:true});
 	if (users.length > 0) {
 	    var user = users[0];
-	    if (user.password == hash.encode_password(password, user.salt)) {
+	    if (user.password == hash.to_base64(hash.encode(password, user.salt))) {
 		return user;
 	    }
 	}
@@ -35,7 +31,7 @@ global.inn = {
      * Attaches the Object to the Session.
      *
      * <code>
-     * if (inn.login(user))
+     * if (roster.login(user))
      *     return 'Win.';
      * else
      *     return 'Fail.';
@@ -57,7 +53,7 @@ global.inn = {
      * Detaches the logged in Object from the Session.
      *
      * <code>
-     * if (inn.logout())
+     * if (roster.logout())
      *     return 'Win.';
      * else
      *     return 'Fail.';
@@ -81,13 +77,13 @@ global.inn = {
      * <code>
      * app.log('Administrators');
      * app.log('--------------');
-     * for each(var user in inn.get_users('Administrator')) {
+     * for each(var user in roster.get_users('Administrator')) {
      *     app.log(user.username);
      * }
      * </code>
      *
      * @param {String} role - optional
-     * @return {Array} An array of {Patron} objects.
+     * @return {Array} An array of {User} objects.
      */
     get_users: function(role) {
 	var filter = {};
@@ -95,6 +91,6 @@ global.inn = {
 	    filter.roles = role;
 	}
 
-	return app.getObjects('Patron', filter, {polymorphic:true});
+	return app.getObjects('User', filter, {polymorphic:true});
     }
 };
