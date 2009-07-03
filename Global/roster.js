@@ -85,12 +85,16 @@ global.roster = {
      * @param {String} role - optional
      * @return {Array} An array of {User} objects.
      */
-    get_users: function(role) {
+    get_users: function(role, sort) {
 	var filter = {};
 	if (role) {
 	    filter.roles = role;
 	}
+	var options = {polymorphic:true};
+	if (sort) {
+	    options.sort = sort;
+	}
 
-	return app.getObjects('User', filter, {polymorphic:true});
+	return app.getHits('User', filter, options);
     }
 };
