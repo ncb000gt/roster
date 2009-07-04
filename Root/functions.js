@@ -1,12 +1,8 @@
 function users_json() {
-    var size = parseInt((req.get('count') || 30), 10);
+    var size = parseInt((req.get('limit') || 20), 10);
     var start = parseInt((req.get('start') || 0), 10);
     var sort = req.get('sort') || 'username';
-    var sortOrder = 'asc';
-    if (sort[0] == '-') {
-	sortOrder = 'desc';
-	sort = sort.substring(1);
-    }
+    var sortOrder = (req.get('dir') || 'asc').toLowerCase();
     var role = req.get('role');
 
     var sort_opt = {};
@@ -15,8 +11,6 @@ function users_json() {
     var users = roster.get_users(role, sort_opt);
 
     return {
-	label: 'username',
-	id: 'username',
 	numRows: users.total,
 	items: users.objects(start, size).map(
 	    function(e) {
