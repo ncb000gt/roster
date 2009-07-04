@@ -29,17 +29,14 @@ Ext.onReady(
 			    height:37
 			}
 		    ),
-		    {
-			title: 'Controls',
-			id: 'west-panel',
-			region:'west',
-			margins: '5 0 0 5',
-			cmargins: '5 5 0 5',
-			width: 200,
-			minSize: 100,
-			maxSize: 300,
-			split: true
-		    },
+		    new ControlPanel(
+			{
+			    region:'west',
+			    margins: '5 0 0 5',
+			    cmargins: '5 5 0 5',
+			    width: 275
+			}
+		    ),
 		    new Grid(
 			this,
 			{

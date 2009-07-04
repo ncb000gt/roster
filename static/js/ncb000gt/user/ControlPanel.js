@@ -11,8 +11,21 @@ var ControlPanel = function(config) {
 		animate: true
 	    },
 	    items: [
-		new NewUserForm()
+		new NewUserForm(
+		    {
+			autoScroll: true
+		    }
+		)
 	    ]
 	}
     );
 };
+
+Ext.extend(
+    ControlPanel,
+    Ext.Panel,
+    {
+    }
+);
+
+Ext.reg('ncb000gt.user.controlpanel', ControlPanel);
