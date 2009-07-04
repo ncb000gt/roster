@@ -38,6 +38,12 @@ var Grid = function(viewer, config) {
 	    header: 'Email',
 	    dataIndex: 'email',
 	    sortable: true
+	},
+	{
+	    id: 'created',
+	    header: 'Created On',
+	    dataIndex: 'created',
+	    sortable: true
 	}
     ];
 

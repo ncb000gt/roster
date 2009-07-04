@@ -18,7 +18,8 @@ function users_json() {
 		    username: e.username,
 		    email: e.email,
 		    last_name: e.last_name,
-		    first_name: e.first_name
+		    first_name: e.first_name,
+		    created: e.created().format("yyyy/MM/dd")
 		};
 	    }
 	)

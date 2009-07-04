@@ -9,8 +9,8 @@ var NewUserForm = function(config) {
 
     add_user_button.on(
 	'click',
-	function() {
-	    console.log('test');
+	function(evt) {
+	    
 	},
 	this
     );
