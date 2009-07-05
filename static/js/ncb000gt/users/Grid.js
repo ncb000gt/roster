@@ -1,7 +1,9 @@
 Ext.namespace('ncb000gt.users');
 
 ncb000gt.users.Grid = function(viewer, config) {
+    Ext.apply(this, config);
     this.viewer = viewer;
+    
     var pagination = new Ext.PagingToolbar(
 	{
 	    pageSize: 20,
@@ -13,8 +15,6 @@ ncb000gt.users.Grid = function(viewer, config) {
     );
 
     config.bbar = pagination;
-
-    Ext.apply(this, config);
 
     events.subscribe('update-user-grid', function() { console.log('test');this.store.reload(); }, this);
 

@@ -33,7 +33,22 @@ Ext.onReady(
 			    el: 'header',
 			    height:37
 			}
-		    ),{
+		    ),
+		    new ncb000gt.ux.ControlPanel(
+			{
+			    viewer: this,
+			    users_store: store,
+			    sections_store: new Ext.data.JsonStore(
+				{
+				    idProperty: 'title',
+				    fields: ['id', 'title', 'samples'],
+				    url: '/getSections'
+				}
+			    )
+			}
+		    )
+
+		    /*{
 			id: 'controls',
 			region:'west',
 			margins: '5 0 0 5',
@@ -53,7 +68,7 @@ Ext.onReady(
 			    store: store,
 			    stripeRows: true
 			}
-		    )
+		    )*/
 		]
 	    }
 	);
