@@ -53,9 +53,6 @@ ncb000gt.roles.NewRoleForm = function(config) {
 		    name: 'role',
 		    allowBlank: false
 		}
-	    ],
-	    buttons: [
-		/*add_role_button*/
 	    ]
         }
     );

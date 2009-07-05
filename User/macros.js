@@ -6,7 +6,8 @@ function setPassword(password) {
 
 function hasRole(role) {
     if (this.roles) {
-	return this.roles.contains(role);
+	var roles = app.getObjects('Role', {name: role});
+	return app.getTargets(this, 'Role').contains(roles[0]);
     }
 
     return false;

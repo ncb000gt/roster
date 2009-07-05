@@ -7,11 +7,13 @@ function getSections() {
 		    id: 'manage-users',
 		    title: 'Manage Users',
 		    icon: '/static/images/config_users.png',
-		    desc: 'Manage your users by clicking this section.'
+		    desc: 'View, edit, add, and remove users.'
 		},
 		{
+		    id: 'manage-roles',
 		    title: 'Manage Roles',
-		    icon: '/static/images/config_roles.png'
+		    icon: '/static/images/config_roles.png',
+		    desc: 'Manage roles and the persmissions associated with those roles.'
 		}
 	    ]
 	}

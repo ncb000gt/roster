@@ -63,10 +63,43 @@ ncb000gt.ux.ControlPanel = function(config) {
 	    );
 	    this.add(panel);
 	    this.activate(panel);
+	},
+	manage_roles: function(config) {
+	    var panel = new Ext.Panel(
+		{
+		    title: 'Role Management',
+		    autoScroll: true,
+		    layout: 'border',
+		    closable: true,
+		    id: 'role-management',
+		    items: [
+			new ncb000gt.roles.ControlPanel(
+			    {
+				width: 275,
+				region: 'west',
+				margins: '5 0 0 5',
+				cmargins: '5 5 0 5'
+			    }
+			),
+			new ncb000gt.roles.Grid(
+			    this.viewer,
+			    {
+				margins: '0 5 0 0',
+				stripeRows: true,
+				region: 'center',
+				store: this.roles_store
+			    }
+			)
+		    ]
+		}
+	    );
+	    this.add(panel);
+	    this.activate(panel);
 	}
     };
 
     events.subscribe('add-tab.manage-users', this.add_tab.manage_users, this);
+    events.subscribe('add-tab.manage-roles', this.add_tab.manage_roles, this);
 };
 
 Ext.extend(

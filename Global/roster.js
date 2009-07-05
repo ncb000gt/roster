@@ -164,9 +164,17 @@ global.roster = {
 	};
     },
     /**
+     * Get all roles from the system as a Hits object.
      *
+     * @param {Object} sort
+     * @return {Hits} Hits to the role objects. Still need to use objects() to deref.
      */
-    get_all_roles: function() {
+    get_all_roles: function(sort) {
+	var options = {polymorphic:true};
+	if (sort) {
+	    options.sort = sort;
+	}
 
+	return app.getHits('Role', {}, options);
     }
 };

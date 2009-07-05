@@ -33,6 +33,7 @@
       <script src="/static/js/ncb000gt/users/NewUserForm.js" type="text/javascript"> </script>
       <script src="/static/js/ncb000gt/users/ControlPanel.js" type="text/javascript"> </script>
       <script src="/static/js/ncb000gt/roles/NewRoleForm.js" type="text/javascript"> </script>
+      <script src="/static/js/ncb000gt/roles/Grid.js" type="text/javascript"> </script>
       <script src="/static/js/ncb000gt/roles/ControlPanel.js" type="text/javascript"> </script>
     </div>
   </body>

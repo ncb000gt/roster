@@ -28,6 +28,34 @@ function users_json() {
     };
 }
 
+function roles_json() {
+    var size = parseInt((req.get('limit') || 20), 10);
+    var start = parseInt((req.get('start') || 0), 10);
+    var sort = req.get('sort') || 'role';
+    if (sort == 'created')
+	sort = '_created';
+    var sortOrder = (req.get('dir') || 'asc').toLowerCase();
+    var role = req.get('role');
+
+    var sort_opt = {};
+    sort_opt[sort] = sortOrder;
+
+    var roles = roster.get_roles(sort_opt);
+
+    return {
+	numRows: roles.total,
+	items: roles.objects(start, size).map(
+	    function(e) {
+		return {
+		    role: e.role,
+		    created: e._created.format("yyyy/MM/dd"),
+		    num_users: e.num_users
+		};
+	    }
+	)
+    };
+}
+
 function add_user() {
     var username = req.get('username');
     var password = req.get('password');

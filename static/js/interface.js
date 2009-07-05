@@ -4,7 +4,7 @@ Ext.onReady(
     function() {
 	events = new Axiom.EventManager();
 
-	var store = new Ext.data.JsonStore(
+	var users_store = new Ext.data.JsonStore(
 	    {
 		totalProperty: 'numRows',
 		root: 'items',
@@ -20,7 +20,21 @@ Ext.onReady(
 	    }
 	);
 
-	store.setDefaultSort('username', 'ASC');
+	var roles_store = new Ext.data.JsonStore(
+	    {
+		totalProperty: 'numRows',
+		root: 'items',
+		url: '/roles_json',
+		fields: [
+		    'role',
+		    'created',
+		    'num_users'
+		],
+		remoteSort: true
+	    }
+	);
+
+	//users_store.setDefaultSort('username', 'ASC');
 
 	var border = new Ext.Viewport(
 	    {
@@ -37,7 +51,8 @@ Ext.onReady(
 		    new ncb000gt.ux.ControlPanel(
 			{
 			    viewer: this,
-			    users_store: store,
+			    roles_store: roles_store,
+			    users_store: users_store,
 			    sections_store: new Ext.data.JsonStore(
 				{
 				    idProperty: 'title',
