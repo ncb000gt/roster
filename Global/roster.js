@@ -149,6 +149,10 @@ global.roster = {
 
 	user = new User();
 	for (var p in config) {
+	    if (p == 'password') {
+		var salt = hash.generate_salt();
+		config[p] = hash.to_base64(hash.encode(config[p], salt, 1000, 'SHA-256'));
+	    }
 	    user[p] = config[p];
 	}
 	var bucket = app.getObjects('UserBucket')[0];
@@ -163,6 +167,6 @@ global.roster = {
      *
      */
     get_all_roles: function() {
-	
+
     }
 };
