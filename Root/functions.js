@@ -40,16 +40,16 @@ function roles_json() {
     var sort_opt = {};
     sort_opt[sort] = sortOrder;
 
-    var roles = roster.get_roles(sort_opt);
+    var roles = roster.get_all_roles(sort_opt);
 
     return {
 	numRows: roles.total,
 	items: roles.objects(start, size).map(
 	    function(e) {
 		return {
-		    role: e.role,
+		    role: e.name,
 		    created: e._created.format("yyyy/MM/dd"),
-		    num_users: e.num_users
+		    num_users: app.getSources(e, 'User').length
 		};
 	    }
 	)

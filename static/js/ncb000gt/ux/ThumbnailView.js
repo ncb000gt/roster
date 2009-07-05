@@ -12,6 +12,7 @@ ncb000gt.ux.ThumbnailView = function(config) {
 	    frame: true,
 	    collapsible: true,
 	    itemSelector: 'dd',
+	    overClass: 'over',
 	    tpl: new Ext.XTemplate(
 		'<div id="items">',
 		'<tpl for=".">',

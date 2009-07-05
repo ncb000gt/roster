@@ -1,8 +1,7 @@
 Ext.namespace('ncb000gt.roles');
 
-ncb000gt.roles.Grid = function(viewer, config) {
+ncb000gt.roles.Grid = function(config) {
     Ext.apply(this, config);
-    this.viewer = viewer;
 
     var pagination = new Ext.PagingToolbar(
 	{

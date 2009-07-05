@@ -50,7 +50,6 @@ ncb000gt.ux.ControlPanel = function(config) {
 			    }
 			),
 			new ncb000gt.users.Grid(
-			    this.viewer,
 			    {
 				margins: '0 5 0 0',
 				stripeRows: true,
@@ -82,7 +81,6 @@ ncb000gt.ux.ControlPanel = function(config) {
 			    }
 			),
 			new ncb000gt.roles.Grid(
-			    this.viewer,
 			    {
 				margins: '0 5 0 0',
 				stripeRows: true,

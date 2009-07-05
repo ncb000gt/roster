@@ -1,9 +1,8 @@
 Ext.namespace('ncb000gt.users');
 
-ncb000gt.users.Grid = function(viewer, config) {
+ncb000gt.users.Grid = function(config) {
     Ext.apply(this, config);
-    this.viewer = viewer;
-    
+
     var pagination = new Ext.PagingToolbar(
 	{
 	    pageSize: 20,
