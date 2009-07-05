@@ -47,28 +47,6 @@ Ext.onReady(
 			    )
 			}
 		    )
-
-		    /*{
-			id: 'controls',
-			region:'west',
-			margins: '5 0 0 5',
-			cmargins: '5 5 0 5',
-			width: 275,
-			items: [
-			    new ncb000gt.users.ControlPanel({})
-			]
-		    },
-		    new ncb000gt.users.Grid(
-			this,
-			{
-			    title: 'Users',
-			    region:'center',
-			    margins: '0 5 0 0',
-			    width: '70%',
-			    store: store,
-			    stripeRows: true
-			}
-		    )*/
 		]
 	    }
 	);

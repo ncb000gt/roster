@@ -37,6 +37,7 @@ ncb000gt.ux.ControlPanel = function(config) {
 		title: 'User Management',
 		autoScroll: true,
 		layout: 'border',
+		closable: true,
 		id: 'user-management',
 		items: [
 		    new ncb000gt.users.ControlPanel(
