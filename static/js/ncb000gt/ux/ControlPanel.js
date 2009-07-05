@@ -31,40 +31,42 @@ ncb000gt.ux.ControlPanel = function(config) {
 	}
     );
 
-    this.add_tab = function(config) {
-	var panel = new Ext.Panel(
-	    {
-		title: 'User Management',
-		autoScroll: true,
-		layout: 'border',
-		closable: true,
-		id: 'user-management',
-		items: [
-		    new ncb000gt.users.ControlPanel(
-			{
-			    width: 275,
-			    region: 'west',
-			    margins: '5 0 0 5',
-			    cmargins: '5 5 0 5'
-			}
-		    ),
-		    new ncb000gt.users.Grid(
-			this.viewer,
-			{
-			    margins: '0 5 0 0',
-			    stripeRows: true,
-			    region: 'center',
-			    store: this.users_store
-			}
-		    )
-		]
-	    }
-	);
-	this.add(panel);
-	this.activate(panel);
+    this.add_tab = {
+	manage_users: function(config) {
+	    var panel = new Ext.Panel(
+		{
+		    title: 'User Management',
+		    autoScroll: true,
+		    layout: 'border',
+		    closable: true,
+		    id: 'user-management',
+		    items: [
+			new ncb000gt.users.ControlPanel(
+			    {
+				width: 275,
+				region: 'west',
+				margins: '5 0 0 5',
+				cmargins: '5 5 0 5'
+			    }
+			),
+			new ncb000gt.users.Grid(
+			    this.viewer,
+			    {
+				margins: '0 5 0 0',
+				stripeRows: true,
+				region: 'center',
+				store: this.users_store
+			    }
+			)
+		    ]
+		}
+	    );
+	    this.add(panel);
+	    this.activate(panel);
+	}
     };
 
-    events.subscribe('add-tab', this.add_tab, this);
+    events.subscribe('add-tab.manage-users', this.add_tab.manage_users, this);
 };
 
 Ext.extend(

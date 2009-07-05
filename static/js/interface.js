@@ -41,7 +41,7 @@ Ext.onReady(
 			    sections_store: new Ext.data.JsonStore(
 				{
 				    idProperty: 'title',
-				    fields: ['id', 'title', 'samples'],
+				    fields: ['id', 'title', 'items'],
 				    url: '/getSections'
 				}
 			    )

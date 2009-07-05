@@ -2,12 +2,12 @@ function getSections() {
     return [
 	{
 	    title: 'Default',
-	    samples: [
+	    items: [
 		{
+		    id: 'manage-users',
 		    title: 'Manage Users',
 		    icon: '/static/images/config_users.png',
-		    desc: 'Manage your users by clicking this section.',
-		    cls: 'ncb000gt.users.Tab'
+		    desc: 'Manage your users by clicking this section.'
 		},
 		{
 		    title: 'Manage Roles',

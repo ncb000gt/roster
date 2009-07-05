@@ -13,11 +13,11 @@ ncb000gt.ux.ThumbnailView = function(config) {
 	    collapsible: true,
 	    itemSelector: 'dd',
 	    tpl: new Ext.XTemplate(
-		'<div id="sample-ct">',
+		'<div id="items">',
 		'<tpl for=".">',
 		'<div><a name="{id}"></a><h2><div>{title}</div></h2>',
 		'<dl>',
-		'<tpl for="samples">',
+		'<tpl for="items">',
 		'<dd id="{cls}"><img src="{icon}"/>',
 		'<div><h4>{title}</h4><p>{desc}</p></div>',
 		'</dd>',
@@ -33,7 +33,7 @@ ncb000gt.ux.ThumbnailView = function(config) {
 		} else {
 		    var t = e.getTarget('dd', 5, true);
 		    if(t){
-			events.publish('add-tab', {cls: t.getAttribute('id')});
+			events.publish('add-tab.manage-users', {cls: t.getAttribute('id')});
 		    }
 		}
 		return ncb000gt.ux.ThumbnailView.superclass.onClick.apply(this, arguments);
