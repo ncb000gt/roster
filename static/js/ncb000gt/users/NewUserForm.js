@@ -1,4 +1,6 @@
-var NewUserForm = function(config) {
+Ext.namespace("ncb000gt.users");
+
+ncb000gt.users.NewUserForm = function(config) {
     config['id'] = 'add_user';
     Ext.apply(this, config);
 
@@ -38,12 +40,11 @@ var NewUserForm = function(config) {
 	this
     );
 
-    NewUserForm.superclass.constructor.call(
+    ncb000gt.users.NewUserForm.superclass.constructor.call(
 	this,
 	{
 	    url: '/add_user',
 	    method: 'post',
-            title: 'User Details',
             defaults: {width: 150},
             defaultType: 'textfield',
             items: [
@@ -85,10 +86,10 @@ var NewUserForm = function(config) {
 };
 
 Ext.extend(
-    NewUserForm,
+    ncb000gt.users.NewUserForm,
     Ext.form.FormPanel,
     {
     }
 );
 
-Ext.reg('ncb000gt.user.newuserform', NewUserForm);
+Ext.reg('ncb000gt.users.newuserform', ncb000gt.users.NewUserForm);

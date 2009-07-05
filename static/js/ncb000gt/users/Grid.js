@@ -1,4 +1,6 @@
-var Grid = function(viewer, config) {
+Ext.namespace('ncb000gt.users');
+
+ncb000gt.users.Grid = function(viewer, config) {
     this.viewer = viewer;
     var pagination = new Ext.PagingToolbar(
 	{
@@ -49,7 +51,7 @@ var Grid = function(viewer, config) {
 	}
     ];
 
-    Grid.superclass.constructor.call(
+    ncb000gt.users.Grid.superclass.constructor.call(
 	this,
 	{
 	    region: 'center',
@@ -71,10 +73,10 @@ var Grid = function(viewer, config) {
 };
 
 Ext.extend(
-    Grid,
+    ncb000gt.users.Grid,
     Ext.grid.GridPanel,
     {
     }
 );
 
-Ext.reg('ncb000gt.user.grid', Grid);
+Ext.reg('ncb000gt.users.grid', ncb000gt.users.Grid);

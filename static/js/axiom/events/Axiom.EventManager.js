@@ -1,9 +1,7 @@
 /**
 * Publish / Subscribe event dispatcher
 */
-if (!window.Axiom) {
-    Axiom = {};
-}
+Ext.namespace("Axiom");
 
 Axiom.EventManager = Ext.extend(Ext.util.Observable, {
   subscribe: function(name, func, scope){

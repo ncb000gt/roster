@@ -33,16 +33,17 @@ Ext.onReady(
 			    el: 'header',
 			    height:37
 			}
-		    ),
-		    new ControlPanel(
-			{
-			    region:'west',
-			    margins: '5 0 0 5',
-			    cmargins: '5 5 0 5',
-			    width: 275
-			}
-		    ),
-		    new Grid(
+		    ),{
+			id: 'controls',
+			region:'west',
+			margins: '5 0 0 5',
+			cmargins: '5 5 0 5',
+			width: 275,
+			items: [
+			    new ncb000gt.users.ControlPanel({})
+			]
+		    },
+		    new ncb000gt.users.Grid(
 			this,
 			{
 			    title: 'Users',
