@@ -1,5 +1,9 @@
+var events = null;
+
 Ext.onReady(
     function() {
+	events = new Axiom.EventManager();
+
 	var store = new Ext.data.JsonStore(
 	    {
 		totalProperty: 'numRows',

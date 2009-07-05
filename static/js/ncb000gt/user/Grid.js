@@ -14,6 +14,8 @@ var Grid = function(viewer, config) {
 
     Ext.apply(this, config);
 
+    events.subscribe('update-user-grid', function() { console.log('test');this.store.reload(); }, this);
+
     this.columns = [
 	{
 	    id: 'username',

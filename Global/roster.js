@@ -96,5 +96,73 @@ global.roster = {
 	}
 
 	return app.getHits('User', filter, options);
+    },
+    /**
+     * Creates users
+     *
+     * <code>
+     * roster.create_user('ncb000gt','Nick','Campbell','test','my@email.com', ['Role1','Role2']);
+     * </code>
+     *
+     * @param {String} username
+     * @param {String} first_name
+     * @param {String} last_name
+     * @param {String} password
+     * @param {String} email
+     * @return {Object} The following schema is returned:
+     *                  {created: {boolean},
+     *                   message: "",
+     *                   user: {}}
+     */
+    create_user: function(username, first_name, last_name, password, email) {
+	var config = username;
+
+	if (!username || !(first_name && last_name && password && email)) {
+	    if (!config || !(config.username && config.password && config.first_name && config.last_name && config.email)) {
+		return {
+		    created: false,
+		    message: 'Invalid Information supplied',
+		    user: null
+		};
+	    }
+	} else {
+	    config = {
+		username: username,
+		password: password,
+		first_name: first_name,
+		last_name: last_name,
+		email: email
+	    };
+	}
+
+	var users = app.getObjects('User', {username: username});
+	var user = null;
+
+	if (users && users.length > 0) {
+	    user = users[0];
+	    return {
+		created: false,
+		message: 'User already exists.',
+		user: user
+	    };
+	}
+
+	user = new User();
+	for (var p in config) {
+	    user[p] = config[p];
+	}
+	var bucket = app.getObjects('UserBucket')[0];
+	bucket.add(user);
+	return {
+	    created: true,
+	    message: 'Successfully created the user.',
+	    user: user
+	};
+    },
+    /**
+     *
+     */
+    get_all_roles: function() {
+	
     }
 };

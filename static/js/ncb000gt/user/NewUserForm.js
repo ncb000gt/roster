@@ -1,4 +1,5 @@
 var NewUserForm = function(config) {
+    config['id'] = 'add_user';
     Ext.apply(this, config);
 
     var add_user_button = new Ext.Button(
@@ -10,7 +11,29 @@ var NewUserForm = function(config) {
     add_user_button.on(
 	'click',
 	function(evt) {
-	    
+	    var params = {};
+
+	    this.items.each(function(item) {params[item.name] = item.getValue();});
+
+	    Ext.Ajax.request(
+		{
+		    url: '/add_user',
+		    params: params,
+		    method: 'post',
+		    disableCaching: true,
+		    success: function(response, options) {
+			var data = Ext.decode(response.responseText);
+			var toast = new Ext.ux.ToastWindow({
+			    title: 'Add User',
+			    html: data.message,
+			    iconCls: 'info'
+			}).show(document);
+			toast = null;
+			if (data.status === 1)
+			    events.publish('update-user-grid');
+		    }
+		}
+	    );
 	},
 	this
     );
@@ -18,6 +41,8 @@ var NewUserForm = function(config) {
     NewUserForm.superclass.constructor.call(
 	this,
 	{
+	    url: '/add_user',
+	    method: 'post',
             title: 'User Details',
             defaults: {width: 150},
             defaultType: 'textfield',

@@ -2,6 +2,8 @@ function users_json() {
     var size = parseInt((req.get('limit') || 20), 10);
     var start = parseInt((req.get('start') || 0), 10);
     var sort = req.get('sort') || 'username';
+    if (sort == 'created')
+	sort = '_created';
     var sortOrder = (req.get('dir') || 'asc').toLowerCase();
     var role = req.get('role');
 
@@ -19,7 +21,7 @@ function users_json() {
 		    email: e.email,
 		    last_name: e.last_name,
 		    first_name: e.first_name,
-		    created: e.created().format("yyyy/MM/dd")
+		    created: e._created.format("yyyy/MM/dd")
 		};
 	    }
 	)
@@ -34,7 +36,12 @@ function add_user() {
     var email = req.get('email');
 
     if (username && password && first_name && last_name && email) {
-	return {status: 1, message: "Completed successfully."};
+	var result = roster.create_user(username, first_name, last_name, password, email);
+	if (result.created) {
+	    return {status: 1, message: result.message};
+	} else {
+	    return {status: -1, message: result.message};
+	}
     } else {
 	return {status: -1, message: "Need more information."};
     }
