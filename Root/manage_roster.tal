@@ -4,7 +4,7 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/ext-all.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/passwordmeter.css" />
-    <link rel="stylesheet" type="text/css" href="/static/css/core.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/roster-core.css" />
   </head>
   <body>
     <div id="content_pane" style="width:100%;height:500px">
