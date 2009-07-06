@@ -40,6 +40,14 @@ ncb000gt.users.NewUserForm = function(config) {
 	this
     );
 
+    var combo_store = new Ext.data.JsonStore(
+	{
+	    url: '/roles_json',
+	    fields: ['role'],
+	    root: 'items'
+	}
+    );
+
     ncb000gt.users.NewUserForm.superclass.constructor.call(
 	this,
 	{
@@ -76,13 +84,29 @@ ncb000gt.users.NewUserForm = function(config) {
 		    name: 'email',
 		    allowBlank: false,
 		    vtype: 'email'
-		}
+		},
+		new Ext.form.ComboBox(
+		    {
+			name:'role',
+			fieldLabel: 'Role',
+			allowBlank: false,
+			store: combo_store,
+			displayField:'role',
+			typeAhead: true,
+			mode: 'local',
+			triggerAction: 'all',
+			emptyText:'Select a role...',
+			selectOnFocus:true
+		    }
+		)
 	    ],
 	    buttons: [
 		add_user_button
 	    ]
         }
     );
+
+    combo_store.load();
 };
 
 Ext.extend(

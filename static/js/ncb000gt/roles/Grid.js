@@ -6,14 +6,14 @@ ncb000gt.roles.Grid = function(config) {
     var pagination = new Ext.PagingToolbar(
 	{
 	    pageSize: 20,
-	    store: config.store,
+	    store: this.store,
 	    displayInfo: true,
 	    displayMsg: 'Displaying users {0} - {1} of {2}',
 	    emptyMsg: "No users available"
 	}
     );
 
-    config.bbar = pagination;
+    this.bbar = pagination;
 
     events.subscribe('update-user-grid', function() { console.log('test');this.store.reload(); }, this);
 

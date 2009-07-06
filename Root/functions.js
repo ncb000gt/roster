@@ -31,7 +31,7 @@ function users_json() {
 function roles_json() {
     var size = parseInt((req.get('limit') || 20), 10);
     var start = parseInt((req.get('start') || 0), 10);
-    var sort = req.get('sort') || 'role';
+    var sort = req.get('sort') || 'name';
     if (sort == 'created')
 	sort = '_created';
     var sortOrder = (req.get('dir') || 'asc').toLowerCase();
@@ -62,9 +62,10 @@ function add_user() {
     var first_name = req.get('first_name');
     var last_name = req.get('last_name');
     var email = req.get('email');
+    var role = req.get('role');
 
     if (username && password && first_name && last_name && email) {
-	var result = roster.create_user(username, first_name, last_name, password, email);
+	var result = roster.create_user(username, first_name, last_name, password, email, role);
 	if (result.created) {
 	    return {status: 1, message: result.message};
 	} else {

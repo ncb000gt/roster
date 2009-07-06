@@ -114,7 +114,7 @@ global.roster = {
      *                   message: "",
      *                   user: {}}
      */
-    create_user: function(username, first_name, last_name, password, email) {
+    create_user: function(username, first_name, last_name, password, email, role) {
 	var config = username;
 
 	if (!username || !(first_name && last_name && password && email)) {
@@ -124,6 +124,11 @@ global.roster = {
 		    message: 'Invalid Information supplied',
 		    user: null
 		};
+	    } else {
+		if (config.role) {
+		    role = config.role;
+		    delete config.role;
+		}
 	    }
 	} else {
 	    config = {
@@ -155,8 +160,27 @@ global.roster = {
 	    }
 	    user[p] = config[p];
 	}
-	var bucket = app.getObjects('UserBucket')[0];
+	var bucket = app.getObjects('Bucket')[0];
 	bucket.add(user);
+
+	if (role) {
+	    var db_roles = app.getHits('Role', {name: role});
+	    if (db_roles.length == 0) {
+		var new_role = new Role();
+		new_role.name = role;
+		root.get('role_bucket').add(new_role);
+		role = new_role;
+	    } else {
+		role = db_roles.objects(0,1)[0];
+	    }
+
+	    if (user.roles) {
+		user.roles = user.roles.concat(new MultiValue(new Reference(role)));
+	    } else {
+		user.roles = new MultiValue(new Reference(role));
+	    }
+	}
+	
 	return {
 	    created: true,
 	    message: 'Successfully created the user.',
