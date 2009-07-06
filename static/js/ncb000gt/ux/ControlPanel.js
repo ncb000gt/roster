@@ -33,66 +33,78 @@ ncb000gt.ux.ControlPanel = function(config) {
 
     this.add_tab = {
 	manage_users: function(config) {
-	    var panel = new Ext.Panel(
-		{
-		    title: 'User Management',
-		    autoScroll: true,
-		    layout: 'border',
-		    closable: true,
-		    id: 'user-management',
-		    items: [
-			new ncb000gt.users.ControlPanel(
-			    {
-				width: 275,
-				region: 'west',
-				margins: '5 0 0 5',
-				cmargins: '5 5 0 5'
-			    }
-			),
-			new ncb000gt.users.Grid(
-			    {
-				margins: '0 5 0 0',
-				stripeRows: true,
-				region: 'center',
-				store: this.users_store
-			    }
-			)
-		    ]
-		}
-	    );
-	    this.add(panel);
-	    this.activate(panel);
+	    var panel = this.getComponent('user-management');
+	    if (!panel) {
+		panel = new Ext.Panel(
+		    {
+			title: 'User Management',
+			autoScroll: true,
+			layout: 'border',
+			closable: true,
+			id: 'user-management',
+			items: [
+			    new ncb000gt.users.NewUserForm(
+				{
+				    id: 'user-controls',
+				    title: 'Add Users',
+				    autoScroll: true,
+				    width: 275,
+				    region: 'west',
+				    margins: '5 0 0 5',
+				    cmargins: '5 5 0 5'
+				}
+			    ),
+			    new ncb000gt.users.Grid(
+				{
+				    margins: '0 5 0 0',
+				    stripeRows: true,
+				    region: 'center',
+				    store: this.users_store
+				}
+			    )
+			]
+		    }
+		);
+		this.add(panel);
+	    }
+	    this.setActiveTab(panel);
 	},
 	manage_roles: function(config) {
-	    var panel = new Ext.Panel(
-		{
-		    title: 'Role Management',
-		    autoScroll: true,
-		    layout: 'border',
-		    closable: true,
-		    id: 'role-management',
-		    items: [
-			new ncb000gt.roles.ControlPanel(
-			    {
-				width: 275,
-				region: 'west',
-				margins: '5 0 0 5',
-				cmargins: '5 5 0 5'
-			    }
-			),
-			new ncb000gt.roles.Grid(
-			    {
-				margins: '0 5 0 0',
-				stripeRows: true,
-				region: 'center',
-				store: this.roles_store
-			    }
-			)
-		    ]
-		}
-	    );
-	    this.add(panel);
-	    this.activate(panel);
+	    var panel = this.getComponent('role-management');
+	    if (!panel) {
+		panel = new Ext.Panel(
+		    {
+			title: 'Role Management',
+			autoScroll: true,
+			layout: 'border',
+			closable: true,
+			id: 'role-management',
+			items: [
+			    new ncb000gt.roles.NewRoleForm(
+				{
+				    title: 'Roles',
+				    id: 'role-controls',
+				    width: 275,
+				    region: 'west',
+				    margins: '5 0 0 5',
+				    cmargins: '5 5 0 5',
+				    autoScroll: true
+				}
+			    ),
+			    new ncb000gt.roles.Grid(
+				{
+				    margins: '0 5 0 0',
+				    stripeRows: true,
+				    region: 'center',
+				    store: this.roles_store
+				}
+			    )
+			]
+		    }
+		);
+		this.add(panel);
+	    }
+	    this.setActiveTab(panel);
 	}
     };
 
