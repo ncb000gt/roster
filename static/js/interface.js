@@ -45,7 +45,7 @@ Ext.onReady(
 			{
 			    region:'north',
 			    el: 'header',
-			    height:37
+			    height:85
 			}
 		    ),
 		    new ncb000gt.ux.ControlPanel(

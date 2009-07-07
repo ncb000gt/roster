@@ -1,6 +1,7 @@
 global.roster = {
     /**
      * Authenticates the user with the password. This does not log the user into the site.
+     * This does use the generated salt for the user.
      *
      * <code>
      * var user = inn.authenticate('me','password');
@@ -156,6 +157,7 @@ global.roster = {
 	for (var p in config) {
 	    if (p == 'password') {
 		var salt = hash.generate_salt();
+		config.salt = salt;
 		config[p] = hash.to_base64(hash.encode(config[p], salt, 1000, 'SHA-256'));
 	    }
 	    user[p] = config[p];
@@ -180,7 +182,7 @@ global.roster = {
 		user.roles = new MultiValue(new Reference(role));
 	    }
 	}
-	
+
 	return {
 	    created: true,
 	    message: 'Successfully created the user.',

@@ -23,5 +23,12 @@ function roster_initialize() {
 	console.add(rb);
     }
 
+    var admin = rb.get('administrator');
+    if (!admin) {
+	admin = new Role();
+	admin.name = "Administrator";
+	rb.add(admin);
+    }
+
     app.log('Roster Initialization Complete');
 }

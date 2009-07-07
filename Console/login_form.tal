@@ -1,0 +1,27 @@
+<html xmlns:tal="http://axiomstack.com/tale" xmlns="http://www.w3c.org/1999/xhtml/">
+  <head>
+    <title>Login - Roster</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/roster-login.css" />
+  </head>
+  <body>
+    <div id="content" class="content">
+      <div id="header">
+	<h1><img src="/static/images/roster-logo.png" title="Roster" alt="Roster" /></h1>
+      </div>
+      <p class="error" tal:content-if="message">
+      </p>
+      <form action="/roster/login" method="post">
+	<fieldset>
+	  <label for="username">Username:</label> <input type="text" name="username" id="username" />
+	</fieldset>
+	<fieldset>
+	  <label for="password">Password:</label> <input type="password" name="password" id="password" />
+	</fieldset>
+	<fieldset>
+	  <input type="submit" value="Login" />
+	</fieldset>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,3 +1,11 @@
+#header{overflow:hidden;}
+#header h1{float:left;}
+#header ul{margin:15px 10px 0 0;padding:0;float:right;}
+#header ul li{padding:0;margin:0;list-style:none;float:left;border-right:1px solid #8db2e3;}
+#header li.last{border:none;}
+#header li a{display:block;padding:0 10px;color:#539ebd;}
+
+
 #thumbnail-view {
     
 }
