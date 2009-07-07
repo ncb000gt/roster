@@ -8,7 +8,7 @@ Ext.onReady(
 	    {
 		totalProperty: 'numRows',
 		root: 'items',
-		url: '/users_json',
+		url: '/roster/users_json',
 		fields: [
 		    'username',
 		    'first_name',
@@ -24,7 +24,7 @@ Ext.onReady(
 	    {
 		totalProperty: 'numRows',
 		root: 'items',
-		url: '/roles_json',
+		url: '/roster/roles_json',
 		fields: [
 		    'role',
 		    'created',
@@ -57,7 +57,7 @@ Ext.onReady(
 				{
 				    idProperty: 'title',
 				    fields: ['id', 'title', 'items'],
-				    url: '/getSections'
+				    url: '/roster/getSections'
 				}
 			    )
 			}

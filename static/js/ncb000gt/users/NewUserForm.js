@@ -19,7 +19,7 @@ ncb000gt.users.NewUserForm = function(config) {
 
 	    Ext.Ajax.request(
 		{
-		    url: '/add_user',
+		    url: '/roster/add_user',
 		    params: params,
 		    method: 'post',
 		    disableCaching: true,
@@ -42,7 +42,7 @@ ncb000gt.users.NewUserForm = function(config) {
 
     var combo_store = new Ext.data.JsonStore(
 	{
-	    url: '/roles_json',
+	    url: '/roster/roles_json',
 	    fields: ['role'],
 	    root: 'items'
 	}
@@ -51,7 +51,7 @@ ncb000gt.users.NewUserForm = function(config) {
     ncb000gt.users.NewUserForm.superclass.constructor.call(
 	this,
 	{
-	    url: '/add_user',
+	    url: '/roster/add_user',
 	    method: 'post',
             defaults: {width: 150},
             defaultType: 'textfield',

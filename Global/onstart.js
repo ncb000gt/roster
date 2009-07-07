@@ -2,25 +2,32 @@ function roster_initialize() {
     app.log('Roster Initialization');
 
     app.log('Creating Objects Needed for Operations');
-    var ub = root.get('user_bucket');
+    var console = root.get('roster');
+    if (!console) {
+	console = new Console();
+	console.id = 'roster';
+	root.add(console);
+    }
+
+    var ub = console.get('user_bucket');
     if (!ub) {
 	ub = new Bucket();
 	ub.id = 'user_bucket';
-	root.add(ub);
+	console.add(ub);
     }
 
-    var rb = root.get('role_bucket');
+    var rb = console.get('role_bucket');
     if (!rb) {
 	rb = new Bucket();
 	rb.id = 'role_bucket';
-	root.add(rb);
+	console.add(rb);
     }
 
     app.log('Adding rewrite rules.');
-    app.addRewriteRule('/manage_roster', '/manage_roster');
-    app.addRewriteRule('/users_json', '/users_json');
-    app.addRewriteRule('/roles_json', '/roles_json');
-    app.addRewriteRule('/getSections', '/getSections');
+    /*app.addRewriteRule('/roster/manage_roster', '/manage_roster');
+    app.addRewriteRule('/roster/users_json', '/users_json');
+    app.addRewriteRule('/roster/roles_json', '/roles_json');
+    app.addRewriteRule('/roster/getSections', '/getSections');*/
 
     app.log('Roster Initialization Complete');
 }

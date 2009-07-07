@@ -7,7 +7,7 @@ ncb000gt.roles.NewRoleForm = function(config) {
     ncb000gt.roles.NewRoleForm.superclass.constructor.call(
 	this,
 	{
-	    url: '/add_role',
+	    url: '/roster/add_role',
 	    method: 'post',
             defaults: {width: 150},
             defaultType: 'textfield',
