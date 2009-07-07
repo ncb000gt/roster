@@ -23,11 +23,5 @@ function roster_initialize() {
 	console.add(rb);
     }
 
-    app.log('Adding rewrite rules.');
-    /*app.addRewriteRule('/roster/manage_roster', '/manage_roster');
-    app.addRewriteRule('/roster/users_json', '/users_json');
-    app.addRewriteRule('/roster/roles_json', '/roles_json');
-    app.addRewriteRule('/roster/getSections', '/getSections');*/
-
     app.log('Roster Initialization Complete');
 }
