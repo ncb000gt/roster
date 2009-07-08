@@ -75,3 +75,18 @@ function add_user() {
 	return {status: -1, message: "Need more information."};
     }
 }
+
+function delete_user() {
+    var username = req.get('username');
+
+    if (username) {
+	var result = roster.delete_user(username);
+	if (result.deleted) {
+	    return {status: 1, message: result.message};
+	} else {
+	    return {status: -1, message: result.message};
+	}
+    } else {
+	return {status: -1, message: "Need more information."};
+    }
+}

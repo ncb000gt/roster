@@ -5,10 +5,11 @@
 #header li.last{border:none;}
 #header li a{display:block;padding:0 10px;color:#539ebd;}
 
+.x-icon-delete{background-image:url(/static/images/delete.png);width:16px;height:16px;}
 /*From http://extjs-ux.org/repo/authors/mjlecomte/trunk/Ext/ux/window/msgWindow.html*/
-.x-icon-error{background-image:url(/static/images/exclamation.gif) ! important;}
-.x-icon-info{background-image:url(/static/images/information.gif) ! important;}
-.x-notification .x-window-body{margin: 0;padding:1em ! important; width: auto ! important;}
+.x-icon-error{background-image:url(/static/images/exclamation.gif);}
+.x-icon-info{background-image:url(/static/images/information.gif);}
+.x-notification .x-window-body{margin:0;padding:1em;width:auto;}
 .msg-over{color:#913049 !important;}
 
 /*From http://extjs.com*/
@@ -97,7 +98,7 @@
     padding-top:6px;
 }
 #thumbnail-view h2 div {
-    background:transparent url(../resources/images/default/grid/group-expand-sprite.gif) no-repeat 3px -47px;
+    background:transparent url(/static/images/default/grid/group-expand-sprite.gif) no-repeat 3px -47px;
     padding:4px 4px 4px 17px;
     color:#3764a0;
     font:bold 11px tahoma, arial, helvetica, sans-serif;

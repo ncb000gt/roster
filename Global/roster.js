@@ -141,7 +141,7 @@ global.roster = {
 	    };
 	}
 
-	var users = app.getObjects('User', {username: username});
+	var users = app.getObjects('User', {username: username}, {polymorphic:true});
 	var user = null;
 
 	if (users && users.length > 0) {
@@ -187,6 +187,34 @@ global.roster = {
 	    created: true,
 	    message: 'Successfully created the user.',
 	    user: user
+	};
+    },
+    /**
+     * Delete a user from the system with a specified username.
+     *
+     * @param {String} username
+     * @return {Object} deleted - [true|false] and a message with details
+     */
+    delete_user: function(username) {
+	if (!username) {
+	    return {
+		deleted: false,
+		message: 'No username specified.'
+	    };
+	}
+
+	var user = app.getObjects('User', {username: username}, {polymorphic: true});
+	if (user.length === 0) {
+	    return {
+		deleted: false,
+		message: 'No user found.'
+	    };
+	}
+
+	user[0].del();
+	return {
+	    deleted:true,
+	    message: 'User "'+username+'" was deleted.'
 	};
     },
     /**

@@ -17,7 +17,42 @@ ncb000gt.users.Grid = function(config) {
 
     events.subscribe('update-user-grid', function() { this.store.reload(); }, this);
 
+    var delete_action = new Ext.ux.grid.RowActions(
+	{
+	    actions: [
+		{
+		    iconCls: 'x-icon-delete',
+		    tooltip:'Remove Entry'
+		}
+	    ],
+	    callbacks: {
+		'x-icon-delete': function(grid, record, action, row, col) {
+		    Ext.Ajax.request(
+			{
+			    url: '/roster/delete_user',
+			    params: record.data,
+			    method: 'post',
+			    disableCaching: true,
+			    success: function(response, options) {
+				var data = Ext.decode(response.responseText);
+				var toast = new Ext.ux.ToastWindow({
+				    title: 'Delete User',
+				    html: data.message,
+				    iconCls: 'x-icon-'+((data.status == 1)?'info':'error')
+				}).show(document);
+				toast = null;
+				if (data.status === 1)
+				    events.publish('update-user-grid');
+			    }
+			}
+		    );
+		}
+	    }
+        }
+    );
+
     this.columns = [
+	delete_action,
 	{
 	    id: 'username',
 	    header: 'Username',
@@ -64,7 +99,8 @@ ncb000gt.users.Grid = function(config) {
 		enableRowBody: false,
 		showPreview: true,
 		getRowClass: this.applyRowClass
-	    }
+	    },
+	    plugins: [delete_action]
 	}
     );
 
