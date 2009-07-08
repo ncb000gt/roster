@@ -3,6 +3,8 @@ var events = null;
 Ext.onReady(
     function() {
 	events = new Axiom.EventManager();
+	Ext.QuickTips.init();
+	Ext.form.Field.prototype.msgTarget = 'side'; //Global form errors
 
 	var users_store = new Ext.data.JsonStore(
 	    {
