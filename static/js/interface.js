@@ -36,8 +36,6 @@ Ext.onReady(
 	    }
 	);
 
-	//users_store.setDefaultSort('username', 'ASC');
-
 	var border = new Ext.Viewport(
 	    {
 		el: 'content_pane',

@@ -28,7 +28,7 @@ ncb000gt.users.NewUserForm = function(config) {
 			var toast = new Ext.ux.ToastWindow({
 			    title: 'Add User',
 			    html: data.message,
-			    iconCls: 'info'
+			    iconCls: 'x-icon-'+((data.status == 1)?'info':'error')
 			}).show(document);
 			toast = null;
 			if (data.status === 1)
@@ -89,7 +89,7 @@ ncb000gt.users.NewUserForm = function(config) {
 		    {
 			name:'role',
 			fieldLabel: 'Role',
-			allowBlank: false,
+			allowBlank: true,
 			store: combo_store,
 			displayField:'role',
 			typeAhead: true,

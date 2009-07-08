@@ -5,7 +5,13 @@
 #header li.last{border:none;}
 #header li a{display:block;padding:0 10px;color:#539ebd;}
 
+/*From http://extjs-ux.org/repo/authors/mjlecomte/trunk/Ext/ux/window/msgWindow.html*/
+.x-icon-error{background-image:url(/static/images/exclamation.gif) ! important;}
+.x-icon-info{background-image:url(/static/images/information.gif) ! important;}
+.x-notification .x-window-body{margin: 0;padding:1em ! important; width: auto ! important;}
+.msg-over{color:#913049 !important;}
 
+/*From http://extjs.com*/
 #thumbnail-view {
     
 }
