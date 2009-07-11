@@ -65,7 +65,8 @@ function add_user() {
     var role = req.get('role');
 
     if (username && password && first_name && last_name && email) {
-	var result = roster.create_user(username, first_name, last_name, password, email, role);
+	var add_to = this.add_to();
+	var result = roster.create_user(username, first_name, last_name, password, email, role, add_to);
 	if (result.created) {
 	    return {status: 1, message: result.message};
 	} else {
