@@ -37,8 +37,8 @@ function roster_initialize() {
 	var pw = roster.hash_password('changeme');
 	user.salt = pw.salt;
 	user.password = pw.password;
+	user.roles = new MultiValue(new Reference(admin));
 	ub.add(user);
-	roster.add_role(user, 'Administrator');
     }
 
     app.log('Apply rewrite rules');

@@ -6,9 +6,11 @@ function setPassword(password) {
 
 function getRoles() {
     var roles = [];
-    for (var i = 0; i < this.roles.length; i++) {
-	var role = this.roles[i];
-	roles.push(role.getTarget().name);
+    if (this.roles) {
+	for (var i = 0; i < this.roles.length; i++) {
+	    var role = this.roles[i];
+	    roles.push(role.getTarget().name);
+	}
     }
     return roles;
 }

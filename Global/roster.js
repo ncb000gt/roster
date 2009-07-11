@@ -237,6 +237,9 @@ global.roster = {
 
 	return app.getHits('Role', {}, options);
     },
+    /**
+     *
+     */
     add_role: function(user, role) {
 	try {
 	    var db_roles = app.getHits('Role', {name: role});
