@@ -14,4 +14,11 @@ Place the module in your app.properties file.
 To use with your user/account objects.
 
 YourUserPrototype/prototype.properties
+
 `_extends = User`
+
+Details
+=============
+
+To get more advanced password hashing you need to include the library [js-hashing](http://github.com/ncb000gt/js-hashing).
+This adds SHA256 hashing of your passwords, automatic salting, and an iterative approach to the hashing (loop the hash recursively 'n' number of times).
