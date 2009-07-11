@@ -32,18 +32,17 @@ function roster_initialize() {
 
     var user = app.getHits('User', {});
     if (user.length === 0) {
-	var response = roster.create_user(
-	    {
-		username: 'admin',
-		password: 'changeme',
-		role: 'Administrator'
-	    }
-	);
-	
-	if (!(response.created)) {
-	    app.log('Failed to create user admin.');
-	}
+	user = new User();
+	user.username = 'admin';
+	var pw = roster.hash_password('changeme');
+	user.salt = pw.salt;
+	user.password = pw.password;
+	ub.add(user);
+	roster.add_role(user, 'Administrator');
     }
+
+    app.log('Apply rewrite rules');
+    app.addRewriteRule('/roster', '/roster');
 
     app.log('Roster Initialization Complete');
 }

@@ -115,7 +115,7 @@ global.roster = {
      *                   message: "",
      *                   user: {}}
      */
-    create_user: function(username, first_name, last_name, password, email, role) {
+    create_user: function(username, first_name, last_name, password, email, role, add_to) {
 	var config = username;
 
 	if (!username || !(first_name && last_name && password && email)) {
@@ -129,6 +129,10 @@ global.roster = {
 		if (config.role) {
 		    role = config.role;
 		    delete config.role;
+		}
+		if (config.add_to) {
+		    add_to = config.add_to;
+		    delete config.add_to;
 		}
 	    }
 	} else {
@@ -156,37 +160,39 @@ global.roster = {
 	user = new User();
 	for (var p in config) {
 	    if (p == 'password') {
-		var salt = hash.generate_salt();
-		config.salt = salt;
-		config[p] = hash.to_base64(hash.encode(config[p], salt, 1000, 'SHA-256'));
+		var pw = roster.hash_password(config[p]);
+		config.salt = pw.salt;
+		config[p] = pw.password;
 	    }
 	    user[p] = config[p];
 	}
-	var bucket = app.getObjects('Bucket')[0];
-	bucket.add(user);
+	if (add_to) {
+	    add_to.add(user);
+	} else {
+	    var bucket = app.getObjects('Bucket')[0];
+	    bucket.add(user);
+	}
 
 	if (role) {
-	    var db_roles = app.getHits('Role', {name: role});
-	    if (db_roles.length == 0) {
-		var new_role = new Role();
-		new_role.name = role;
-		root.get('role_bucket').add(new_role);
-		role = new_role;
-	    } else {
-		role = db_roles.objects(0,1)[0];
-	    }
-
-	    if (user.roles) {
-		user.roles = user.roles.concat(new MultiValue(new Reference(role)));
-	    } else {
-		user.roles = new MultiValue(new Reference(role));
-	    }
+	    roster.add_role(user, role);
 	}
 
 	return {
 	    created: true,
 	    message: 'Successfully created the user.',
 	    user: user
+	};
+    },
+    /**
+     *
+     */
+    hash_password: function(pw, salt) {
+	salt = salt || hash.generate_salt();
+	pw = hash.to_base64(hash.encode(pw, salt, 1000, 'SHA-256'));
+
+	return {
+	    salt: salt,
+	    password: pw
 	};
     },
     /**
@@ -230,5 +236,28 @@ global.roster = {
 	}
 
 	return app.getHits('Role', {}, options);
+    },
+    add_role: function(user, role) {
+	try {
+	    var db_roles = app.getHits('Role', {name: role});
+	    if (db_roles.length == 0) {
+		var new_role = new Role();
+		new_role.name = role;
+		root.get('role_bucket').add(new_role);
+		role = new_role;
+	    } else {
+		role = db_roles.objects(0,1)[0];
+	    }
+
+	    if (user.roles) {
+		user.roles = user.roles.concat(new MultiValue(new Reference(role)));
+	    } else {
+		user.roles = new MultiValue(new Reference(role));
+	    }
+	} catch (e) {
+	    app.log(e);
+	    return false;
+	}
+	return true;
     }
 };

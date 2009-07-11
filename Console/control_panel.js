@@ -23,6 +23,7 @@ function getSections() {
 function login() {
     var username = req.get('username');
     var password = req.get('password');
+    var postback = req.get('postback');
     var came_from = req.get('came_from') || 'http://'+req.data.http_host+'/roster';
 
     var message = null;
@@ -34,7 +35,7 @@ function login() {
 	    res.redirect(came_from);
 	}
 	message = "Login attempt failed. Could not find a user with that username/password combination.";
-    } else {
+    } else if (postback) {
 	message = "Need more information. Please fill out all fields.";
     }
 
