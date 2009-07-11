@@ -17,6 +17,14 @@ YourUserPrototype/prototype.properties
 
 `_extends = User`
 
+
+When you add Roster to your application you'll be able to manage your Roster by going to http://localhost/roster/.
+If you haven't logged in before, the default username and password is:
+
+L: admin
+P: changeme
+
+
 Details
 =============
 

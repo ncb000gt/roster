@@ -9,13 +9,6 @@ function roster_initialize() {
 	root.add(console);
     }
 
-    var ub = console.get('user_bucket');
-    if (!ub) {
-	ub = new Bucket();
-	ub.id = 'user_bucket';
-	console.add(ub);
-    }
-
     var rb = console.get('role_bucket');
     if (!rb) {
 	rb = new Bucket();
@@ -28,6 +21,28 @@ function roster_initialize() {
 	admin = new Role();
 	admin.name = "Administrator";
 	rb.add(admin);
+    }
+
+    var ub = console.get('user_bucket');
+    if (!ub) {
+	ub = new Bucket();
+	ub.id = 'user_bucket';
+	console.add(ub);
+    }
+
+    var user = app.getHits('User', {});
+    if (user.length === 0) {
+	var response = roster.create_user(
+	    {
+		username: 'admin',
+		password: 'changeme',
+		role: 'Administrator'
+	    }
+	);
+	
+	if (!(response.created)) {
+	    app.log('Failed to create user admin.');
+	}
     }
 
     app.log('Roster Initialization Complete');
