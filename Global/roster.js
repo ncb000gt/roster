@@ -161,7 +161,7 @@ global.roster = {
 	for (var p in config) {
 	    if (p == 'password') {
 		var pw = roster.hash_password(config[p]);
-		config.salt = pw.salt;
+		user.salt = pw.salt;
 		config[p] = pw.password;
 	    }
 	    user[p] = config[p];

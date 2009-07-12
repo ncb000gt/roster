@@ -44,4 +44,5 @@ function login() {
 
 function logout() {
     roster.logout();
+    res.redirect(this.getURI());
 }
