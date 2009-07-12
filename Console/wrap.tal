@@ -4,7 +4,6 @@
     <link rel="stylesheet" type="text/css" href="/static/css/roster-login.css" />
   </head>
   <body>
-blah
     <div tal:replace="this.login_form(data)"> </div>
   </body>
 </html>

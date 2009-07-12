@@ -6,7 +6,7 @@
   </div>
   <p class="error" tal:content-if="data.message">
   </p>
-  <form tal:attr="action: this.getURI()+'/login'" method="post">
+  <form tal:attr="action: data.cur_uri+((data.cur_uri == '/')?'':'/')+'login'" method="post">
     <fieldset>
       <label for="username">Username:</label> <input type="text" name="username" id="username" />
     </fieldset>
@@ -14,6 +14,7 @@
       <label for="password">Password:</label> <input type="password" name="password" id="password" />
     </fieldset>
     <fieldset>
+      <input tal:if="data.referer_path" type="hidden" name="came_from" tal:attr="value: data.referer_path" />
       <input type="hidden" name="postback" value="true" />
       <input type="submit" value="Login" />
     </fieldset>

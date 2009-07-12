@@ -20,7 +20,7 @@ function login() {
     var data = {};
 
     if (get_globals) {
-	data = get_globals();
+	data = get_globals(this);
     }
 
     if (message) {
