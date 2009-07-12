@@ -1,0 +1,10 @@
+<html xmlns:tal="http://axiomstack.com/tale" xmlns="http://www.w3c.org/1999/xhtml/">
+  <head>
+    <title>Login - Roster</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/roster-login.css" />
+  </head>
+  <body>
+blah
+    <div tal:replace="this.login_form(data)"> </div>
+  </body>
+</html>

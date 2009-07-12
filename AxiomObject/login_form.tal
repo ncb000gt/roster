@@ -1,0 +1,21 @@
+<div id="content" class="content" xmlns:tal="http://axiomstack.com/tale">
+  <div id="header" tal:if="data.is_roster">
+    <h1>
+      <img src="/static/images/roster-logo.png" title="Roster" alt="Roster" />
+    </h1>
+  </div>
+  <p class="error" tal:content-if="data.message">
+  </p>
+  <form tal:attr="action: this.getURI()+'/login'" method="post">
+    <fieldset>
+      <label for="username">Username:</label> <input type="text" name="username" id="username" />
+    </fieldset>
+    <fieldset>
+      <label for="password">Password:</label> <input type="password" name="password" id="password" />
+    </fieldset>
+    <fieldset>
+      <input type="hidden" name="postback" value="true" />
+      <input type="submit" value="Login" />
+    </fieldset>
+  </form>
+</div>
