@@ -5,6 +5,8 @@ function login() {
     var came_from = req.get('came_from') || 'http://'+req.data.http_host+'/roster';
 
     var message = null;
+	  app.log(req.get('came_from'));
+	  app.log(came_from);
 
     if (postback && username && password) {
 	var user = roster.authenticate(username, password);
@@ -19,7 +21,7 @@ function login() {
 
     var data = {};
 
-    if (get_globals) {
+    if (global.get_globals) {
 	data = get_globals(this);
     }
 
