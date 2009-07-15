@@ -37,6 +37,8 @@ function roster_initialize() {
 	var pw = roster.hash_password('changeme');
 	user.salt = pw.salt;
 	user.password = pw.password;
+	user.disabled = false;
+	user.activated = true;
 	user.roles = new MultiValue(new Reference(admin));
 	ub.add(user);
     }

@@ -27,22 +27,44 @@ ncb000gt.users.Grid = function(config) {
 	    ],
 	    callbacks: {
 		'x-icon-delete': function(grid, record, action, row, col) {
-		    Ext.Ajax.request(
+		    Ext.MessageBox.buttonText.yes = 'Delete';
+		    Ext.MessageBox.buttonText.no = 'Disable';
+		    Ext.MessageBox.buttonText.cancel = 'Cancel';
+		    Ext.MessageBox.show(
 			{
-			    url: '/roster/delete_user',
-			    params: record.data,
-			    method: 'post',
-			    disableCaching: true,
-			    success: function(response, options) {
-				var data = Ext.decode(response.responseText);
-				var toast = new Ext.ux.ToastWindow({
-				    title: 'Delete User',
-				    html: data.message,
-				    iconCls: 'x-icon-'+((data.status == 1)?'info':'error')
-				}).show(document);
-				toast = null;
-				if (data.status === 1)
-				    events.publish('update-user-grid');
+			    title: 'Manage User Account',
+			    msg: 'What would you like to do with this user account?',
+			    width:300,
+			    buttons: Ext.MessageBox.YESNOCANCEL,
+			    fn: function(btn){
+				console.log(String.format('You clicked the {0} button.', btn));
+				var action = '';
+				if (btn == 'yes')
+				    action = 'delete';
+				else if (btn == 'no')
+				    action = 'disable';
+				else
+				    return;
+
+				Ext.Ajax.request(
+				    {
+					url: '/roster/'+action+'_user',
+					params: record.data,
+					method: 'post',
+					disableCaching: true,
+					success: function(response, options) {
+					    var data = Ext.decode(response.responseText);
+					    var toast = new Ext.ux.ToastWindow({
+							    title: 'Managed User Account',
+							    html: data.message,
+							    iconCls: 'x-icon-'+((data.status == 1)?'info':'error')
+									       }).show(document);
+					    toast = null;
+					    if (data.status === 1)
+						events.publish('update-user-grid');
+					}
+				    }
+				);
 			    }
 			}
 		    );
@@ -81,6 +103,12 @@ ncb000gt.users.Grid = function(config) {
 	    id: 'created',
 	    header: 'Created On',
 	    dataIndex: 'created',
+	    sortable: true
+	},
+	{
+	    id: 'status',
+	    header: 'Status',
+	    dataIndex: 'status',
 	    sortable: true
 	}
     ];

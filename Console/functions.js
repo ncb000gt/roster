@@ -16,12 +16,19 @@ function users_json() {
 	numRows: users.total,
 	items: users.objects(start, size).map(
 	    function(e) {
+		var status = 'Disabled';
+		if (e.disabled && !(e.activated))
+		    status = 'Not Activated';
+		else
+		    status = 'Enabled';
+
 		return {
 		    username: e.username,
 		    email: e.email,
 		    last_name: e.last_name,
 		    first_name: e.first_name,
-		    created: e._created.format("yyyy/MM/dd")
+		    created: e._created.format("yyyy/MM/dd"),
+		    status: status
 		};
 	    }
 	)
@@ -85,6 +92,22 @@ function delete_user() {
     if (username) {
 	var result = roster.delete_user(username);
 	if (result.deleted) {
+	    return {status: 1, message: result.message};
+	} else {
+	    return {status: -1, message: result.message};
+	}
+    } else {
+	return {status: -1, message: "Need more information."};
+    }
+}
+
+
+function disable_user() {
+    var username = req.get('username');
+
+    if (username) {
+	var result = roster.disable_user(username);
+	if (result.disabled) {
 	    return {status: 1, message: result.message};
 	} else {
 	    return {status: -1, message: result.message};

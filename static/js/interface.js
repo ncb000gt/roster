@@ -16,7 +16,8 @@ Ext.onReady(
 		    'first_name',
 		    'last_name',
 		    'email',
-		    'created'
+		    'created',
+		    'status'
 		],
 		remoteSort: true
 	    }

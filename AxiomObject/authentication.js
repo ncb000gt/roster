@@ -25,6 +25,10 @@ function login() {
 	data = get_globals(this);
     }
 
+    if (!(data.cur_uri)) {
+	data.cur_uri = '/roster';
+    }
+
     if (message) {
 	data.message = message;
     }

@@ -18,7 +18,7 @@ global.roster = {
      * @return {Object} returns user object if found, otherwise, null.
      */
     authenticate: function(username, password) {
-	var users = app.getObjects('User', {username: username}, {polymorphic:true});
+	var users = app.getObjects('User', {username: username, disabled: false}, {polymorphic:true});
 	if (users.length > 0) {
 	    var user = users[0];
 	    if (user.password == hash.to_base64(hash.encode(password, user.salt))) {
@@ -84,16 +84,24 @@ global.roster = {
      * </code>
      *
      * @param {String} role - optional
+     * @param {String} sort - optional
+     * @param {String} enabled - optional - Only get users that are enabled
+     *
      * @return {Array} An array of {User} objects.
      */
-    get_users: function(role, sort) {
+    get_users: function(role, sort, enabled) {
 	var filter = {};
 	if (role) {
 	    filter.roles = role;
 	}
+
 	var options = {polymorphic:true};
 	if (sort) {
 	    options.sort = sort;
+	}
+
+	if (enabled) {
+	    filter.disabled = false;
 	}
 
 	return app.getHits('User', filter, options);
@@ -177,6 +185,8 @@ global.roster = {
 	    roster.add_role(user, role);
 	}
 
+	/*TODO: SEND EMAIL TO USERS FOR ACTIVATION*/
+
 	return {
 	    created: true,
 	    message: 'Successfully created the user.',
@@ -221,6 +231,34 @@ global.roster = {
 	return {
 	    deleted:true,
 	    message: 'User "'+username+'" was deleted.'
+	};
+    },
+    /**
+     * Disable a user account in the system with a specified username.
+     *
+     * @param {String} username
+     * @return {Object} disabled - [true|false] and a message with details
+     */
+    disable_user: function(username) {
+	if (!username) {
+	    return {
+		disabled: false,
+		message: 'No username specified.'
+	    };
+	}
+
+	var user = app.getObjects('User', {username: username}, {polymorphic: true});
+	if (user.length === 0) {
+	    return {
+		disabled: false,
+		message: 'No user found.'
+	    };
+	}
+
+	user[0].disabled = true;
+	return {
+	    disabled: true,
+	    message: 'User "'+username+'" was disabled.'
 	};
     },
     /**
