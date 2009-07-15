@@ -20,9 +20,10 @@ global.roster = {
     authenticate: function(username, password) {
 	var users = app.getObjects('User', {username: username, disabled: false}, {polymorphic:true});
 	if (users.length > 0) {
-	    var user = users[0];
-	    if (user.password == hash.to_base64(hash.encode(password, user.salt))) {
-		return user;
+	    for each(var user in users) {
+		if (user.password == hash.to_base64(hash.encode(password, user.salt))) {
+		    return user;
+		}
 	    }
 	}
 
