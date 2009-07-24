@@ -154,7 +154,7 @@ global.roster = {
 	    };
 	}
 
-	var users = app.getObjects('User', {username: username}, {polymorphic:true});
+	var users = app.getObjects('User', {username: config.username}, {polymorphic:true});
 	var user = null;
 
 	if (users && users.length > 0) {
